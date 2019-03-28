@@ -1,0 +1,22 @@
+server {
+  listen {{ nginx_port }};
+  listen [::]:{{ nginx_port }};
+
+  server_name {{ nginx_vhost }};
+
+  root /var/www/{{ nginx_vhost }};
+  index index.html;
+  autoindex on;
+
+  location / {
+    if (-f $document_root/maintenance.html) {
+      return 503;
+    }
+
+    try_files $uri $uri/ =404;
+  }
+  error_page 503 @maintenance;
+  location @maintenance {
+    rewrite ^(.*)$ /maintenance.html break;
+  }
+}

@@ -1,0 +1,30 @@
+---
+- name: Remove default nginx vhost config file
+  file:
+    path: "{{ nginx_vhost_default }}"
+    state: absent
+  notify: restart nginx
+
+- name: Copy vhost configuration
+  template:
+    src: "{{item}}.j2"
+    dest: "/{{item}}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "{{ nginx_vhost_path }}/{{ nginx_vhost }}"
+  notify:
+    - reload nginx
+
+- name: Create vhost directory
+  file:
+    path: "/var/www/{{ nginx_vhost }}"
+    state: directory
+
+- name: Copy maintenance page
+  get_url:
+    url: https://raw.githubusercontent.com/shuu01/maintenance/master/maintenance.html
+    dest: "/var/www/{{ nginx_vhost }}/maintenance.html"
+    mode: 0644
+    force: yes

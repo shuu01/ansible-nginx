@@ -1,0 +1,9 @@
+---
+root_group: root
+nginx_conf_path: etc/nginx/conf.d
+nginx_conf: etc/nginx/nginx.conf
+nginx_mime: etc/nginx/mime.types
+nginx_pid: run/nginx.pid
+nginx_vhost_path: etc/nginx/sites-enabled
+nginx_vhost_default: etc/nginx/sites-enabled/default
+nginx_user: www-data

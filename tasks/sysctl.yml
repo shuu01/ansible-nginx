@@ -1,0 +1,11 @@
+---
+- sysctl:
+    name: fs.file-max
+    value: "{{ sysctl_fs_filemax }}"
+    state: present
+
+- sysctl:
+    name: net.core.somaxconn
+    value: "{{ sysctl_somaxconn }}"
+    state: present
+    ignoreerrors: yes

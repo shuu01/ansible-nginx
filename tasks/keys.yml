@@ -1,0 +1,9 @@
+---
+- name: Set up multiple ssh keys
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - id-rsa1.pub
+    - id-rsa2.pub

@@ -1,0 +1,23 @@
+---
+- name: Update apt cache.
+  apt:
+    update_cache: yes
+  changed_when: false
+
+- name: nginx install
+  apt:
+    pkg:
+      - nginx=1.10.3-0ubuntu0.16.04.3
+    state: present
+
+- name: wget install
+  apt:
+    pkg:
+      - wget=1.17.1-1ubuntu1.4
+    state: present
+
+- name: zsh install
+  apt:
+    pkg:
+      - zsh=5.1.1-1ubuntu2.3
+    state: present
